@@ -45,12 +45,16 @@ def board_did_change(old, new):
     return False
 
 def show_board(board):
-    print("=" * 50)
+    print("/" + "-" * 47 + "`")
     for i in range(len(board)):
-        for j in range(len(board[i])):
-            print("%5d" % board[i][j], end=" ")
-        print()
-    print("=" * 50)
+        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11+ "|" + " " * 11 + "|")
+        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
+        print("|" + "{:^11s}".format(str(board[i][0]) if board[i][0] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][1]) if board[i][1] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][2]) if board[i][2] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][3]) if board[i][3] != 0 else " ") + "|")
+        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
+        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
+        if i != len(board) - 1:
+            print("|" + "-" * 47 + "|")
+    print("`" + "-" * 47 + "/")
 
 def place_random_tile(board):
     while True:
