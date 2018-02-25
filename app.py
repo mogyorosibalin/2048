@@ -1,6 +1,7 @@
 import copy
 import random
 
+
 def create_blank_board():
     board = []
     for i in range(0, 4):
@@ -9,6 +10,7 @@ def create_blank_board():
             row.append(0)
         board.append(row)
     return board
+
 
 def create_old_board(board):
     old_board = []
@@ -19,12 +21,13 @@ def create_old_board(board):
         old_board.append(row)
     return old_board
 
+
 def rotate_board_horizontally(board):
     for i in range(len(board)):
         board[i] = board[i][::-1]
     return board
 
-# The top row will be the left col, and the bottom row will be the right col
+
 def rotate_board_up_to_left(board):
     temp_board = [[], [], [], []]
     for i in range(len(board)):
@@ -32,17 +35,14 @@ def rotate_board_up_to_left(board):
             temp_board[j].append(board[i][j])
     return temp_board
 
-# Return true if the board changed
+
 def board_did_change(old, new):
-    # print("==OLD==")
-    # show_board(old)
-    # print("==NEW==")
-    # show_board(new)
     for i in range(len(old)):
         for j in range(len(old[i])):
             if new[i][j] != old[i][j]:
                 return True
     return False
+
 
 def show_board(board):
     print("/" + "-" * 47 + "`")
@@ -56,6 +56,7 @@ def show_board(board):
             print("|" + "-" * 47 + "|")
     print("`" + "-" * 47 + "/")
 
+
 def place_random_tile(board):
     while True:
         row = random.randint(0, len(board[0]) - 1)
@@ -63,6 +64,7 @@ def place_random_tile(board):
         if board[row][col] == 0:
             board[row][col] = 2
             return board
+
 
 def move(board):
     board = board[:]
@@ -88,26 +90,18 @@ def move(board):
             print("Invalid direction")
     return board
 
+
 def move_board_horizontal(board):
-    # for i in range(0, 1):
     for i in range(len(board)):
         for j in range(len(board[i]) - 1):
             same = same_after_tile(j, board[i])
             if isinstance(same, int):
                 board[i][j] *= 2
                 board[i][same] = 0
-        # print("=" * 50)
-        # show_board(board)
         for j in range(len(board[i])):
             leading_zeros = count_leading_zeros(board[i], j)
-            # print("Row: %s" % str(board[i]))
-            # print("Index: %d" % j)
-            # print("Zeros: %d" % leading_zeros)
-            # input()
             if leading_zeros != 0:
                 board[i] = shift_tiles_left(board[i], leading_zeros, j)
-        # show_board(board)
-        # input()
     return board
 
 
@@ -138,19 +132,12 @@ def main():
     board = create_blank_board()
     board = place_random_tile(board)
     while True:
-        #print("˚˛`˙´```|Ä®™<>#&@{}<;>*äđÐ[]íłŁ`|Ä®™™€Í,÷÷ß¤×")
         old_board = create_old_board(board)
         show_board(board)
         board = move(board)
-        # print("#" * 50)
-        # print("#" * 50)
-        # print("#" * 50)
-        # print("#####  OLD  #####")
-        # show_board(old_board)
-        # print("#####  NEW  #####")
-        # show_board(board)
         if board_did_change(old_board, board):
             board = place_random_tile(board)
+
 
 main()
 
