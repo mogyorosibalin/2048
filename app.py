@@ -2,6 +2,26 @@ import copy
 import random
 
 
+def get_tile_colors(num):
+    index = 0
+    if num == 0:
+        return None
+    while num != 2:
+        num /= 2
+        index += 1
+    return index % len(colors)
+
+colors = [
+    "\033[1;30;43m",
+    "\033[1;30;46m",
+    "\033[1;30;44m",
+    "\033[1;30;45m",
+    "\033[1;30;41m",
+    "\033[1;30;42m",
+    "\033[1;37;40m"
+]
+
+
 def create_blank_board():
     board = []
     for i in range(0, 4):
@@ -45,16 +65,23 @@ def board_did_change(old, new):
 
 
 def show_board(board):
-    print("/" + "-" * 47 + "`")
+    print("/" + "-" * 47 + "\\")
     for i in range(len(board)):
-        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11+ "|" + " " * 11 + "|")
-        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
+        for k in range(2):
+            print("|", end="")
+            for j in range(len(board[i])):
+                print("{:^11s}".format(" "), end="|")
+            print()
         print("|" + "{:^11s}".format(str(board[i][0]) if board[i][0] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][1]) if board[i][1] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][2]) if board[i][2] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][3]) if board[i][3] != 0 else " ") + "|")
-        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
-        print("|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|" + " " * 11 + "|")
-        if i != len(board) - 1:
+        for k in range(2):
+            print("|", end="")
+            for j in range(len(board[i])):
+                pass
+                print("{:^11s}".format(" "), end="|")
+            print()
+        if i < len(board) - 1:
             print("|" + "-" * 47 + "|")
-    print("`" + "-" * 47 + "/")
+    print("\\" + "-" * 47 + "/")
 
 
 def place_random_tile(board):
