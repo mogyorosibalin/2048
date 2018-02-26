@@ -70,14 +70,15 @@ def show_board(board):
         for k in range(2):
             print("|", end="")
             for j in range(len(board[i])):
-                print("{:^11s}".format(" "), end="|")
+                print("{}{:^11s}{}".format(colors[get_tile_colors(board[i][j])] if board[i][j] != 0 else "", " ", "\033[0m" if board[i][j] != 0 else ""), end="|")
             print()
-        print("|" + "{:^11s}".format(str(board[i][0]) if board[i][0] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][1]) if board[i][1] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][2]) if board[i][2] != 0 else " ") + "|" + "{:^11s}".format(str(board[i][3]) if board[i][3] != 0 else " ") + "|")
+        for j in range(len(board[i])):
+            print("|{}{:^11s}{}".format(colors[get_tile_colors(board[i][j])] if board[i][j] != 0 else "", str(board[i][j]) if board[i][j] != 0 else " ", "\033[0m" if board[i][j] != 0 else ""), end="")
+        print("|")
         for k in range(2):
             print("|", end="")
             for j in range(len(board[i])):
-                pass
-                print("{:^11s}".format(" "), end="|")
+                print("{}{:^11s}{}".format(colors[get_tile_colors(board[i][j])] if board[i][j] != 0 else "", " ", "\033[0m"), end="|")
             print()
         if i < len(board) - 1:
             print("|" + "-" * 47 + "|")
