@@ -1,5 +1,19 @@
-import copy
+import subprocess
 import random
+import sys
+
+
+def init_terminal():
+    sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=49))
+    create_display()
+
+
+def create_display():
+    subprocess.call(["printf", "\033c"])
+    print("=" * 49)
+    print("2048".center(49, ' '))
+    print("=" * 49)
+    pass
 
 
 def get_tile_colors(num):
@@ -157,9 +171,11 @@ def shift_tiles_left(row, num, index):
 
 
 def main():
+    init_terminal()
     board = create_blank_board()
     board = place_random_tile(board)
     while True:
+        create_display()
         old_board = create_old_board(board)
         show_board(board)
         board = move(board)
@@ -167,6 +183,5 @@ def main():
             board = place_random_tile(board)
 
 
-main()
-
-
+if __name__ == "__main__":
+    main()
