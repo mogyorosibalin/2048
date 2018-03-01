@@ -110,6 +110,9 @@ class Board:
         print("\r" + "Score: {}".format(self.score).center(49, " "))
         print("\r" + "-" * 49 + "\033[0m\r")
 
+    def is_win(self):
+        return any([True for i in range(len(self.board)) for j in range(len(self.board[i])) if self.board[i][j] == 2048])
+
     def is_full(self):
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
